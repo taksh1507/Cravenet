@@ -7,13 +7,13 @@ CraveNet is a desktop application that compares dish prices between **Swiggy** a
 ## 🚀 Features
 
 - 🔍 **Price Comparison**  
-  Compare dish prices from Swiggy and Zomato for the same restaurant in real-time.
+  Compare dish prices from Swiggy and Zomato for the same restaurant.
 
 - 🖥️ **JavaFX Interface**  
   Responsive and intuitive UI for smooth user interaction.
 
 - ⚙️ **Java Backend**  
-  Core functionality and logic implemented in Java for performance and scalability.
+  Core functionality and logic implemented in Java.
 
 - 💾 **SQL Database**  
   Stores restaurant, menu, and price data for efficient querying and comparison.
@@ -32,5 +32,5 @@ CraveNet is a desktop application that compares dish prices between **Swiggy** a
 
 1. **Clone the repository**
    ```bash
-
-https://github.com/taksh1507/Cravenet.git
+   git clone https://github.com/taksh1507/Cravenet.git
+   cd Cravenet
