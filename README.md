@@ -32,5 +32,5 @@ CraveNet is a desktop application that compares dish prices between **Swiggy** a
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/taksh1507/CraveNet-Price-Comparesion-between-Swiggy-and-Zomato.git
-   cd CraveNet
+
+https://github.com/taksh1507/Cravenet.git
