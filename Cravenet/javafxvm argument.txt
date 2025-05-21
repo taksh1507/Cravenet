@@ -1,0 +1,392 @@
+--module-path "C:\Program Files\Java\openjfx-23_windows-x64_bin-sdk (1)\javafx-sdk-23\lib" --add-modules javafx.controls,javafx.graphics,javafx.fxml
+
+
+
+
+
+-- Create a new database
+CREATE DATABASE restaurantess_data;
+
+-- Use the new database
+USE restaurantess_data;
+
+-- Create the restaurants table
+CREATE TABLE restaurants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- Create the dishes table
+CREATE TABLE dishes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- Create a junction table for many-to-many relationships
+CREATE TABLE restaurant_dish (
+    restaurant_id INT,
+    dish_id INT,
+    PRIMARY KEY (restaurant_id, dish_id),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
+    FOREIGN KEY (dish_id) REFERENCES dishes(id)
+);
+CREATE TABLE price_data (
+    dish_id INT PRIMARY KEY,
+    swiggy_price DECIMAL(10, 2) NOT NULL,
+    zomato_price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (dish_id) REFERENCES dishes(id)
+);
+select*from price_data;
+
+-- Insert the new restaurant names into the restaurants table
+INSERT INTO restaurants (name) VALUES
+('Dominos'),
+('Pizza Hut'),
+('Bhagwati Restaurant'),
+('Burger King'),
+('Mc Donalds'),
+('The J'),
+('WTC'),
+('Chai Sutta Bar'),
+('Food Adda'),
+('East Asia'),
+('Flavours of China'),
+('Banana Leaf'),
+('Persian Darbar'),
+('House of Biryani'),
+('Amar Fast Food Restaurant'),
+('Sattva Veg Restaurant'),
+('Achija'),
+('Great Indian Khichdi by EatFit'),
+('Makhan Maar Ke'),
+('Mom Hand Kitchen'),
+('Paratha Express'),
+('Merwans Cake'),
+('Monginis Cake Shop'),
+('Bombay Ice Cream'),
+('Baskin Robbins'),
+('South Tiffin Box'),
+('South Delight'),
+('Bombay Bytes'),
+('MM Mithaiwala'),
+('Jain Sweets'),
+('Cafe Coffee Day'),
+('Subway'),
+('Frozen Bottle'),
+('Keventers'),
+('UFO-Fries'),
+('SnakeyWakey');
+
+-- Insert data for dishes into the dishes table
+INSERT INTO dishes (name) VALUES 
+('Pizza'), 
+('Burger'), 
+('Pasta'), 
+('Noodles'), 
+('Biryani'), 
+('Pav Bhaji'), 
+('Khichdi'), 
+('Paratha'), 
+('Cake'), 
+('Ice Cream'), 
+('Dosa'), 
+('Vada Pav'), 
+('Idli'), 
+('Sandwich'), 
+('Milkshake'), 
+('Fries'), 
+('Juice'), 
+('Cold Drink');
+
+-- Insert data into the restaurant_dish table to link restaurants with dishes
+-- Linking Pizza
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 1 FROM restaurants WHERE name IN ('Dominos', 'Pizza Hut', 'Bhagwati Restaurant');
+
+-- Linking Burger
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 2 FROM restaurants WHERE name IN ('Burger King', 'Mc Donalds', 'The J');
+
+-- Linking Pasta
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 3 FROM restaurants WHERE name IN ('WTC', 'Chai Sutta Bar', 'Food Adda');
+
+-- Linking Noodles
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 4 FROM restaurants WHERE name IN ('East Asia', 'Flavours of China', 'Bhagwati Restaurant');
+
+-- Linking Biryani
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 5 FROM restaurants WHERE name IN ('Banana Leaf', 'Persian Darbar', 'House of Biryani');
+
+-- Linking Pav Bhaji
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 6 FROM restaurants WHERE name IN ('Bhagwati Restaurant', 'Amar Fast Food Restaurant', 'Sattva Veg Restaurant');
+
+-- Linking Khichdi
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 7 FROM restaurants WHERE name IN ('Achija', 'Sattva Veg Restaurant', 'Great Indian Khichdi by EatFit');
+
+-- Linking Paratha
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 8 FROM restaurants WHERE name IN ('Makhan Maar Ke', 'Mom Hand Kitchen', 'Paratha Express');
+
+-- Linking Cake
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 9 FROM restaurants WHERE name IN ('Merwans Cake', 'Monginis Cake Shop');
+
+-- Linking Ice Cream
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 10 FROM restaurants WHERE name IN ('Bombay Ice Cream', 'Baskin Robbins', 'Bhagwati Restaurant');
+
+-- Linking Dosa
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 11 FROM restaurants WHERE name IN ('South Tiffin Box', 'South Delight', 'Sattva Veg Restaurant');
+
+-- Linking Vada Pav
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 12 FROM restaurants WHERE name IN ('Bombay Bytes', 'MM Mithaiwala', 'Jain Sweets');
+
+-- Linking Idli
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 13 FROM restaurants WHERE name IN ('South Tiffin Box', 'South Delight', 'Sattva Veg Restaurant');
+
+-- Linking Sandwich
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 14 FROM restaurants WHERE name IN ('Food Adda', 'Subway', 'Cafe Coffee Day');
+
+-- Linking Milkshake
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 15 FROM restaurants WHERE name IN ('Frozen Bottle', 'Keventers');
+
+-- Linking Fries
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 16 FROM restaurants WHERE name IN ('Mc Donalds', 'UFO-Fries');
+
+-- Linking Juice
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 17 FROM restaurants WHERE name IN ('SnakeyWakey');
+
+-- Linking Cold Drink
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 18 FROM restaurants WHERE name IN ('Dominos', 'Pizza Hut', 'Mc Donalds', 'Burger King');
+-- Insert sample price data for each dish
+
+
+truncate table dishes;
+INSERT INTO dishes (name) VALUES 
+('khichdi'),
+('Pav Bhaji'); 
+-- Insert image paths for existing restaurants
+UPDATE restaurants 
+SET image_path = 'file:C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Dominos.jpg' 
+WHERE name = 'Dominos';
+
+UPDATE restaurants 
+SET image_path = 'file:C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Pizza Hut.jpg' 
+WHERE name = 'Pizza Hut';
+
+UPDATE restaurants 
+SET image_path = 'file:C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Bhagwati Restaurant.jpg' 
+WHERE name = 'Bhagwati Restaurant';
+ALTER TABLE dishes
+ADD COLUMN image_path VARCHAR(255) NOT NULL;
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\pizza.jpg' WHERE name = 'Pizza';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\burger.jpg' WHERE name = 'Burger';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Pasta.jpg' WHERE name = 'Pasta';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\noodles.jpg' WHERE name = 'Noodles';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\biryani.jpg' WHERE name = 'Biryani';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\PavBhaji.jpg' WHERE name = 'Pav Bhaji';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\khichdi.jpg' WHERE name = 'Khichdi';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Paratha.jpg' WHERE name = 'Paratha';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\cake.jpg' WHERE name = 'Cake';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Ice Cream.jpg' WHERE name = 'Ice Cream';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Dosa.jpg' WHERE name = 'Dosa';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Vada Pav.jpg' WHERE name = 'Vada Pav';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\IDLI.jpg' WHERE name = 'Idli';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Sandwich.jpg' WHERE name = 'Sandwich';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Milkshakes.jpg' WHERE name = 'Milkshake';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Fries.jpg' WHERE name = 'Fries';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\Juices.jpg' WHERE name = 'Juice';
+UPDATE dishes SET image_path = 'C:\\Users\\ashish\\OneDrive\\Documents\\Desktop\\Cravenet\\Location Image\\cold drink.jpg' WHERE name = 'Cold Drink';
+
+ALTER TABLE price_data
+ADD COLUMN restaurant_id INT NOT NULL,
+ADD FOREIGN KEY (restaurant_id) REFERENCES restaurants(id);
+-- Linking Pizza
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 1 FROM restaurants WHERE name IN ('Dominos', 'Pizza Hut', 'Bhagwati Restaurant');
+
+-- Insert sample price data for Pizza
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(1, 1, 450.00, 500.00),  -- Dominos
+(1, 2, 400.00, 450.00),  -- Pizza Hut
+(1, 3, 420.00, 470.00);  -- Bhagwati Restaurant
+
+-- Linking Burger
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 2 FROM restaurants WHERE name IN ('Burger King', 'Mc Donalds', 'The J');
+
+-- Insert sample price data for Burger
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(2, 4, 250.00, 300.00),  -- Burger King
+(2, 5, 230.00, 280.00),  -- Mc Donalds
+(2, 6, 240.00, 290.00);  -- The J
+
+-- Linking Pasta
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 3 FROM restaurants WHERE name IN ('WTC', 'Chai Sutta Bar', 'Food Adda');
+
+-- Insert sample price data for Pasta
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(3, 7, 350.00, 400.00),  -- WTC
+(3, 8, 330.00, 380.00),  -- Chai Sutta Bar
+(3, 9, 340.00, 390.00);  -- Food Adda
+
+-- Linking Noodles
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 4 FROM restaurants WHERE name IN ('East Asia', 'Flavours of China', 'Bhagwati Restaurant');
+
+-- Insert sample price data for Noodles
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(4, 10, 180.00, 200.00),  -- East Asia
+(4, 11, 160.00, 180.00),  -- Flavours of China
+(4, 3, 170.00, 190.00);   -- Bhagwati Restaurant
+
+-- Linking Biryani
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 5 FROM restaurants WHERE name IN ('Banana Leaf', 'Persian Darbar', 'House of Biryani');
+
+-- Insert sample price data for Biryani
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(5, 12, 400.00, 450.00),  -- Banana Leaf
+(5, 13, 420.00, 470.00),  -- Persian Darbar
+(5, 14, 380.00, 430.00);  -- House of Biryani
+
+-- Linking Pav Bhaji
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 6 FROM restaurants WHERE name IN ('Bhagwati Restaurant', 'Amar Fast Food Restaurant', 'Sattva Veg Restaurant');
+
+-- Insert sample price data for Pav Bhaji
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(6, 3, 100.00, 120.00),   -- Bhagwati Restaurant
+(6, 15, 110.00, 130.00),  -- Amar Fast Food Restaurant
+(6, 16, 90.00, 110.00);   -- Sattva Veg Restaurant
+
+-- Linking Khichdi
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 7 FROM restaurants WHERE name IN ('Achija', 'Sattva Veg Restaurant', 'Great Indian Khichdi by EatFit');
+
+-- Insert sample price data for Khichdi
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(7, 17, 150.00, 160.00),  -- Achija
+(7, 16, 140.00, 150.00);  -- Sattva Veg Restaurant
+
+-- Linking Paratha
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 8 FROM restaurants WHERE name IN ('Makhan Maar Ke', 'Mom Hand Kitchen', 'Paratha Express');
+
+-- Insert sample price data for Paratha
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(8, 18, 120.00, 130.00),  -- Makhan Maar Ke
+(8, 19, 110.00, 120.00),  -- Mom Hand Kitchen
+(8, 20, 115.00, 125.00);   -- Paratha Express
+
+-- Linking Cake
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 9 FROM restaurants WHERE name IN ('Merwans Cake', 'Monginis Cake Shop');
+
+-- Insert sample price data for Cake
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(9, 21, 200.00, 220.00),  -- Merwans Cake
+(9, 22, 210.00, 230.00);  -- Monginis Cake Shop
+
+-- Linking Ice Cream
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 10 FROM restaurants WHERE name IN ('Bombay Ice Cream', 'Baskin Robbins', 'Bhagwati Restaurant');
+
+-- Insert sample price data for Ice Cream
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(10, 23, 100.00, 110.00),  -- Bombay Ice Cream
+(10, 24, 90.00, 100.00),   -- Baskin Robbins
+(10, 3, 95.00, 105.00);     -- Bhagwati Restaurant
+
+-- Linking Dosa
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 11 FROM restaurants WHERE name IN ('South Tiffin Box', 'South Delight', 'Sattva Veg Restaurant');
+
+-- Insert sample price data for Dosa
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(11, 25, 80.00, 90.00),   -- South Tiffin Box
+(11, 26, 75.00, 85.00),   -- South Delight
+(11, 16, 70.00, 80.00);    -- Sattva Veg Restaurant
+
+-- Linking Vada Pav
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 12 FROM restaurants WHERE name IN ('Bombay Bytes', 'MM Mithaiwala', 'Jain Sweets');
+
+-- Insert sample price data for Vada Pav
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(12, 27, 50.00, 60.00),   -- Bombay Bytes
+(12, 28, 45.00, 55.00),   -- MM Mithaiwala
+(12, 29, 40.00, 50.00);    -- Jain Sweets
+
+-- Linking Idli
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 13 FROM restaurants WHERE name IN ('South Tiffin Box', 'South Delight', 'Sattva Veg Restaurant');
+
+-- Insert sample price data for Idli
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(13, 25, 60.00, 70.00),   -- South Tiffin Box
+(13, 26, 55.00, 65.00),   -- South Delight
+(13, 16, 50.00, 60.00);    -- Sattva Veg Restaurant
+
+-- Linking Sandwich
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 14 FROM restaurants WHERE name IN ('Food Adda', 'Subway', 'Cafe Coffee Day');
+
+-- Insert sample price data for Sandwich
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(14, 31, 120.00, 130.00),  -- Food Adda
+(14, 32, 115.00, 125.00);   -- Subway
+
+-- Linking Milkshake
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 15 FROM restaurants WHERE name IN ('Frozen Bottle', 'Keventers');
+
+-- Insert sample price data for Milkshake
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(15, 33, 150.00, 160.00),  -- Frozen Bottle
+(15, 34, 140.00, 150.00);   -- Keventers
+
+-- Linking Fries
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 16 FROM restaurants WHERE name IN ('Mc Donalds', 'UFO-Fries');
+
+-- Insert sample price data for Fries
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(16, 5, 80.00, 90.00),    -- Mc Donalds
+(16, 35, 70.00, 80.00);    -- UFO-Fries
+
+-- Linking Juice
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 17 FROM restaurants WHERE name IN ('SnakeyWakey');
+
+-- Insert sample price data for Juice
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(17, 36, 60.00, 70.00);    -- SnakeyWakey
+
+-- Linking Cold Drink
+INSERT INTO restaurant_dish (restaurant_id, dish_id)
+SELECT id, 18 FROM restaurants WHERE name IN ('Dominos', 'Pizza Hut', 'Mc Donalds', 'Burger King');
+
+-- Insert sample price data for Cold Drink
+INSERT INTO price_data (dish_id, restaurant_id, swiggy_price, zomato_price) VALUES
+(18, 1, 50.00, 60.00),     -- Dominos
+(18, 2, 45.00, 55.00),     -- Pizza Hut
+(18, 5, 40.00, 50.00),     -- Mc Donalds
+(18, 4, 42.00, 52.00);      -- Burger King
+
+
+
+
