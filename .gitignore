@@ -1,0 +1,12 @@
+# Compiled output
+app/bin/
+
+# IDE project files
+.classpath
+.project
+.settings/
+*.class
+
+# OS files
+.DS_Store
+Thumbs.db
