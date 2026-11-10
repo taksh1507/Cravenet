@@ -245,6 +245,14 @@ Password  : 518815
 
 ---
 
+## Build, Verification & Security Notes
+
+**Build.** No build tool or CI workflow is configured (NetBeans/Eclipse JavaFX project). The Java sources parse cleanly — the only `javac` errors are missing `javafx.*` packages, which resolve once the JavaFX 23 SDK is on the module path (`config/javafx-vm-args.txt`). There are no tests and no runtime server to probe; the app requires a local MySQL 8.0 instance seeded with `sql/01_cravenet_database.sql` then `sql/02_restaurantes1_data.sql`, plus a desktop display for JavaFX.
+
+**Security.** The MySQL password `518815` is hardcoded in source across `Login.java`, `Registration.java`, `DishSelection.java`, `OrderHistory.java`, `RestaurantPage.java`, `RestaurantSelection.java`, `RestaurantDishes.java`, and `RestaurantDishPriceApp.java`, and the OTP flow expects real Gmail credentials in `Registration.java`. This is documented in SETUP.md but should be treated as a finding: move DB credentials out of source into a config file or environment variable before any non-personal use. Do not commit real Gmail app passwords.
+
+---
+
 ## Supported Cities
 
 | City | Status |
